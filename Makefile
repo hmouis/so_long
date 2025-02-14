@@ -1,6 +1,6 @@
 NAME = so_long
 
-SRC = get_next_line.c get_next_line_utils.c so_long.c
+SRC = get_next_line.c get_next_line_utils.c so_long.c check_map.c
 
 CC = cc
 CFLAGS = -Wall -Wextra -g
