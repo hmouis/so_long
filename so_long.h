@@ -23,6 +23,9 @@
 # include <fcntl.h>
 # include <unistd.h>
 
+char **read_file(int fd, int len);
+int count_lines(int fd);
+int check_error(int ac, char **av);
 char	*ft_strcpy(char *str, char *after_newline);
 char	*get_line(char *str, char *after_newline);
 char	*fill_str(char *str, int fd);

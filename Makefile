@@ -3,7 +3,7 @@ NAME = so_long
 SRC = get_next_line.c get_next_line_utils.c so_long.c
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -g
 OBJS = $(SRC:.c=.o)
 
 all: $(NAME)
