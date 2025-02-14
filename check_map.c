@@ -12,25 +12,65 @@
 
 #include "so_long.h"
 
-int check_length(char **arr)
+int check_lines(char **arr, int len)
 {
-	int len;
 	int i;
+	char c;
+	int length;
 
 	i = 0;
-	len = ft_strlen(arr[i]);
-	while (arr[i])
+	c = arr[0][0];
+	length = ft_strlen(arr[0]);
+	while (arr[0][i])
 	{
-		if (len != ft_strlen(arr[i]))
+		if (c != arr[0][i] || c != arr[len][i])
 		{
-			i = 0;
-			while (arr[i++])
-				free(arr[i]);
-			free(arr);
-			write (1, "Error\nthe lines have a different length",38);
+			write (1, "Error\ndefine the wall whit a different characters\n",50);
+			return (0);
+		}
+		i++;
+	}
+	i = 0;
+	while (i <= len)
+	{
+		if (c != arr[i][0] || c != arr[i][length - 1])
+		{
+			write (1, "Error\ndefine the wall whit a different characters\n",50);
 			return (0);
 		}
 		i++;
 	}
 	return (1);
 }
+
+int check_rectangular(char **arr, int len)
+{
+	if (len + 1 >= ft_strlen(arr[0]))
+	{
+		write (1, "Error\nthe map is not rectangular\n", 33);
+		return (0);
+	}
+	return (1);
+}
+
+int check_valide_c(char **arr, int len, char c)
+{
+	int (length), (i), (j), (count);
+
+	i = 1;
+	count = 0;
+	length = ft_strlen(arr[0]);
+	while (i < len)
+	{
+		j = 1;
+		while (j < length - 1)
+		{
+			if (c == arr[i][j])
+				count++;
+			j++;
+		}
+		i++;
+	}
+	return (count);
+}
+

@@ -17,6 +17,7 @@ char **read_file(int fd, int len)
 	char **arr;
 	int i;
 	char *line;
+	int j;
 
 	arr = malloc(sizeof(char *) * (len + 1));
 	i = 0;
@@ -26,6 +27,10 @@ char **read_file(int fd, int len)
 	while (line)
 	{
 		arr[i] = line;
+		j = 0;
+		while (arr[i][j] != '\n')
+			j++;
+		arr[i][j] = '\0';
 		i++;
 		line = get_next_line(fd);
 	}
@@ -35,23 +40,25 @@ char **read_file(int fd, int len)
 
 int count_lines(int fd)
 {
-	int len;
-	char *line_1;
-	char *lines;
-	int j;
+	char (*line_1), (*lines);
+	int (j), (len);
 
 	len = 0;
 	line_1 = get_next_line(fd);
-	j = ft_strlen(line_1);
-	if (j < 3 || line_1[0] == '\n')
-		return (free(line_1), 0);
 	lines = get_next_line(fd);
-	if (!line_1 || !lines)
+	if (!line_1 || !lines || ft_strlen(line_1) < 3 || line_1[0] == '\n')
+	{
+		write(1, "Error\nThe file is empty, or the lines have different lengths.\n", 62);
 		return (free(line_1),free(lines), 0);
+	}
+	j = ft_strlen(line_1);
 	while (lines)
 	{
-		if (((j != ft_strlen(lines)) && ft_strlen(lines) < 3) || lines[0] == '\n')
+		if ((j != ft_strlen(lines)) || ft_strlen(lines) < 3 || lines[0] == '\n')
+		{
+			write(1, "Error\nThe file is empty, or the lines have different lengths.\n", 62);
 			return (0);
+		}
 		len++;
 		lines = get_next_line(fd);
 	}
@@ -93,13 +100,17 @@ int main(int ac, char**av)
 	close(fd);
 	if (len == 0)
 	{
-		write(1, "Error\nThe file is empty, or the lines have different lengths.\n", 62);
 		return (1);
 	}
 	fd = check_error(ac, av);
 	arr = read_file(fd, len);
-	if (!check_length(arr))
+	if (!check_lines(arr, len) || !check_rectangular(arr, len))
 		return (1);
+	if (check_valide_c(arr, len, 'E') != 1 || check_valide_c(arr, len, 'P') != 1 || check_valide_c(arr, len, 'C') <=0)
+	{
+		write (1, "Error\nu need to follow do ruls\n", 31);
+		return (1);
+	}
 
 
 

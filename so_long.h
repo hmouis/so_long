@@ -23,7 +23,9 @@
 # include <fcntl.h>
 # include <unistd.h>
 
-int check_length(char **arr);
+int check_valide_c(char **arr, int len, char c);
+int check_rectangular(char **arr, int len);
+int check_lines(char **arr, int len);
 char **read_file(int fd, int len);
 int count_lines(int fd);
 int check_error(int ac, char **av);
