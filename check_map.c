@@ -6,17 +6,17 @@
 /*   By: hmouis <hmouis@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 13:49:15 by hmouis            #+#    #+#             */
-/*   Updated: 2025/02/14 13:58:43 by hmouis           ###   ########.fr       */
+/*   Updated: 2025/02/16 13:56:03 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int check_lines(char **arr, int len)
+int	check_lines(char **arr, int len)
 {
-	int i;
-	char c;
-	int length;
+	int		i;
+	char	c;
+	int		length;
 
 	i = 0;
 	c = arr[0][0];
@@ -25,7 +25,7 @@ int check_lines(char **arr, int len)
 	{
 		if (c != arr[0][i] || c != arr[len][i])
 		{
-			write (1, "Error\ndefine the wall whit a different characters\n",50);
+			write(1, "Error\ndefine the wall whit a different characters\n", 50);
 			return (0);
 		}
 		i++;
@@ -35,7 +35,7 @@ int check_lines(char **arr, int len)
 	{
 		if (c != arr[i][0] || c != arr[i][length - 1])
 		{
-			write (1, "Error\ndefine the wall whit a different characters\n",50);
+			write(1, "Error\ndefine the wall whit a different characters\n",50);
 			return (0);
 		}
 		i++;
@@ -43,20 +43,19 @@ int check_lines(char **arr, int len)
 	return (1);
 }
 
-int check_rectangular(char **arr, int len)
+int	check_rectangular(char **arr, int len)
 {
 	if (len + 1 >= ft_strlen(arr[0]))
 	{
-		write (1, "Error\nthe map is not rectangular\n", 33);
+		write(1, "Error\nthe map is not rectangular\n", 33);
 		return (0);
 	}
 	return (1);
 }
 
-int check_valide_c(char **arr, int len, char c)
+int	check_valide_c(char **arr, int len, char c)
 {
-	int (length), (i), (j), (count);
-
+	int(length), (i), (j), (count);
 	i = 1;
 	count = 0;
 	length = ft_strlen(arr[0]);
@@ -66,11 +65,84 @@ int check_valide_c(char **arr, int len, char c)
 		while (j < length - 1)
 		{
 			if (c == arr[i][j])
+			{
 				count++;
+			}
 			j++;
 		}
 		i++;
 	}
 	return (count);
 }
+
+int check_char(char c, char *str)
+{
+	int i;
+	int remainder;
+
+	i = 0;
+	remainder = 0;
+	while (str[i])
+	{
+		if (str[i] == c)
+			remainder = 1;
+		i++;
+	}
+	if (remainder == 0)
+		return (0);
+	return (1);
+}
+
+int check_map(char **arr, int len)
+{
+	int (i), (j);
+
+	i = 1;
+	while (i < len)
+	{
+		j = 1;
+		while (arr[i][j])
+		{
+			if (!check_char(arr[i][j], "0PCE1"))
+			{
+				write(1, "Error\ninvalide character\n", 25);
+				return (0);
+			}
+			j++;
+		}
+		i++;
+	}
+	return (1);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -12,7 +12,6 @@
 
 #include "so_long.h"
 
-
 char	*ft_strchr(char *s, char c)
 {
 	size_t	i;
