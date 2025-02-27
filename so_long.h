@@ -6,7 +6,7 @@
 /*   By: hmouis <hmouis@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 09:34:51 by hmouis            #+#    #+#             */
-/*   Updated: 2025/02/16 14:58:01 by hmouis           ###   ########.fr       */
+/*   Updated: 2025/02/23 09:59:37 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,41 +18,42 @@
 # endif
 
 # include <fcntl.h>
+# include <mlx.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 
 typedef struct s_collect_position
 {
-	int column;
-	int row;
+	int x;
+	int y;
 	struct s_collect_position *next;
 }	t_collect_pos;
 
 typedef struct s_player_position
 {
-	int column;
-	int row;
+	int x;
+	int y;
 	struct s_player_position *next;
 }	t_player_pos;
 
 typedef struct s_exit_position
 {
-	int column;
-	int row;
+	int x;
+	int y;
 	struct s_exit_position *next;
 }	t_exit_pos;
 
-
-
-
+char	*ft_strdup(char *s1);
+void check_way(char **arr, int x, int y);
+int handle_key(char **arr, int key, t_player_pos *p);
 t_collect_pos *get_collectible_pos(char **arr, char c, int len);
 t_exit_pos *get_exit_position(char **arr, char c, int len);
 t_player_pos *get_player_pos(char **arr, char c, int len);
-t_exit_pos *creat_e_node(int column, int row);
-t_player_pos *creat_p_node(int column, int row);
+t_exit_pos *creat_e_node(int x, int y);
+t_player_pos *creat_p_node(int x, int y);
 void free_lst(t_collect_pos **lst);
-t_collect_pos *creat_c_node(int column, int row);
+t_collect_pos *creat_c_node(int x, int y);
 void add_node(t_collect_pos **lst, t_collect_pos *node);
 t_collect_pos *last_node(t_collect_pos *lst);
 int check_char(char c, char *str);

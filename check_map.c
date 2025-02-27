@@ -15,15 +15,13 @@
 int	check_lines(char **arr, int len)
 {
 	int		i;
-	char	c;
 	int		length;
 
 	i = 0;
-	c = arr[0][0];
 	length = ft_strlen(arr[0]);
 	while (arr[0][i])
 	{
-		if (c != arr[0][i] || c != arr[len][i])
+		if ('1' != arr[0][i] || '1' != arr[len - 1][i])
 		{
 			write(1, "Error\ndefine the wall whit a different characters\n", 50);
 			return (0);
@@ -31,9 +29,9 @@ int	check_lines(char **arr, int len)
 		i++;
 	}
 	i = 0;
-	while (i <= len)
+	while (i < len)
 	{
-		if (c != arr[i][0] || c != arr[i][length - 1])
+		if ('1' != arr[i][0] || '1' != arr[i][length - 1])
 		{
 			write(1, "Error\ndefine the wall whit a different characters\n",50);
 			return (0);
@@ -114,35 +112,4 @@ int check_map(char **arr, int len)
 	}
 	return (1);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

@@ -12,39 +12,39 @@
 
 #include "so_long.h"
 
-t_exit_pos *creat_e_node(int column, int row)
+t_exit_pos *creat_e_node(int x, int y)
 {
 	t_exit_pos *node;
 
 	node = malloc(sizeof(t_exit_pos));
 	if (!node)
 		return (NULL);
-	node->column = column;
-	node->row = row;
+	node->x = x;
+	node->y = y;
 	node->next = NULL;
 	return (node);
 }
-t_player_pos *creat_p_node(int column, int row)
+t_player_pos *creat_p_node(int x, int y)
 {
 	t_player_pos *node;
 
 	node = malloc(sizeof(t_player_pos));
 	if (!node)
 		return (NULL);
-	node->column = column;
-	node->row = row;
+	node->x = x;
+	node->y = y;
 	node->next = NULL;
 	return (node);
 }
-t_collect_pos *creat_c_node(int column, int row)
+t_collect_pos *creat_c_node(int x, int y)
 {
 	t_collect_pos *node;
 
 	node = malloc(sizeof(t_collect_pos));
 	if (!node)
 		return (NULL);
-	node->column = column;
-	node->row = row;
+	node->x = x;
+	node->y = y;
 	node->next = NULL;
 	return (node);
 }
@@ -55,7 +55,7 @@ void add_node(t_collect_pos **lst, t_collect_pos *node)
 
 	if (!lst ||  !node)
 		return ;
-	if ((*lst)->next)
+	if (*lst)
 	{
 		last = last_node(*lst);
 		last->next = node;
@@ -80,8 +80,8 @@ void free_lst(t_collect_pos **lst)
 		return ;
 	while (*lst)
 	{
-		*lst = (*lst)->next;
-		free(save);
+		save = (*lst)->next;
+		free(*lst);
 		*lst = save;
 	}
 }

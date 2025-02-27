@@ -20,7 +20,7 @@ t_exit_pos *get_exit_position(char **arr, char c, int len)
 
 	i = 1;
 	e_pos = NULL;
-	while (i < len)
+	while (i < len - 1)
 	{
 		j = 1;
 		while (arr[i][j])
@@ -39,15 +39,14 @@ t_exit_pos *get_exit_position(char **arr, char c, int len)
 
 t_collect_pos *get_collectible_pos(char **arr, char c, int len)
 {
-	int (i), (j), (r);
+	int (i), (j); 
 	t_collect_pos *c_pos;
 	t_collect_pos *lst;
 
 	lst = NULL;
 	i = 1;
-	r = 1;
 	c_pos = NULL;
-	while (i < len)
+	while (i < len - 1)
 	{
 		j = 1;
 		while (arr[i][j])
@@ -55,12 +54,10 @@ t_collect_pos *get_collectible_pos(char **arr, char c, int len)
 			if (arr[i][j] == c)
 			{
 				c_pos = creat_c_node(j, i);
-				if (r == 1)
-				{
-					r = 0;
+				if (!lst)
 					lst = c_pos;
-				}
-				add_node(&lst, c_pos);
+				else
+					add_node(&lst, c_pos);
 			}
 			j++;
 		}
@@ -77,7 +74,7 @@ t_player_pos *get_player_pos(char **arr, char c, int len)
 
 	i = 1;
 	p_pos = NULL;
-	while (i < len)
+	while (i < len - 1)
 	{
 		j = 1;
 		while (arr[i][j])

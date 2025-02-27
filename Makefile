@@ -1,9 +1,11 @@
 NAME = so_long
 
-SRC = get_next_line.c get_next_line_utils.c so_long.c check_map.c control_nodes.c get_position.c
+SRC = get_next_line.c get_next_line_utils.c so_long.c check_map.c control_nodes.c get_position.c check_valide_map.c ft_strdup.c
 
 CC = cc
-CFLAGS = -Wall -Wextra -g
+CFLAGS = -Wall -Wextra -Werror -g 
+#-fsanitize=address 
+#-lXext -lX11 -lm -lz
 OBJS = $(SRC:.c=.o)
 
 all: $(NAME)

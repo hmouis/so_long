@@ -17,7 +17,6 @@ char	**read_file(int fd, int len)
 	char	**arr;
 	int		i;
 	char	*line;
-	int		j;
 
 	arr = malloc(sizeof(char *) * (len + 1));
 	i = 0;
@@ -26,12 +25,9 @@ char	**read_file(int fd, int len)
 		return (free(line), NULL);
 	while (line)
 	{
-		arr[i] = line;
-		j = 0;
-		while (arr[i][j] != '\n')
-			j++;
-		arr[i][j] = '\0';
+		arr[i] = ft_strdup(line);
 		i++;
+		free (line);
 		line = get_next_line(fd);
 	}
 	arr[i] = NULL;
@@ -40,9 +36,10 @@ char	**read_file(int fd, int len)
 
 int	count_lines(int fd)
 {
-	char(*line_1), (*lines);
-	int(j), (len);
-	len = 0;
+	char (*line_1), (*lines);
+	int (j), (len);
+
+	len = 1;
 	line_1 = get_next_line(fd);
 	lines = get_next_line(fd);
 	if (!line_1 || !lines || ft_strlen(line_1) < 3 || line_1[0] == '\n')
@@ -56,11 +53,13 @@ int	count_lines(int fd)
 		if ((j != ft_strlen(lines)) || ft_strlen(lines) < 3 || lines[0] == '\n')
 		{
 			write(1, "Error\nThe file is empty,or the lines have different lengths.\n", 62);
-			return (0);
+			return (free(lines), free(line_1), 0);
 		}
 		len++;
+		free(lines);
 		lines = get_next_line(fd);
 	}
+	free(line_1);
 	return (len);
 }
 
@@ -88,66 +87,89 @@ int	check_error(int ac, char **av)
 	return (fd);
 }
 
+void free_arr(char ***arr)
+{
+	int i;
+
+	i = 0;
+	while ((*arr)[i])
+	{
+		free((*arr)[i]);
+		i++;
+	}
+	free(*arr);
+}
+
+int check_map_c(char **str)
+{
+	int (i), (j);
+
+	i = 0;
+	j = 0;
+	while (str[i])
+	{
+		j = 0;
+		while (str[i][j])
+		{
+			if (str[i][j] == 'C' || str[i][j] == 'E')
+				return (0);
+			j++;
+		}
+		i++;
+	}
+	return (1);
+}
+
 int	main(int ac, char **av)
 {
 	int		fd;
 	int		len;
 	char	**arr;
-	t_player_pos *p_pos;
-	t_exit_pos *e_pos;
-	t_collect_pos *c_pos;
+	int n_c;
+	t_player_pos *p;
+	t_exit_pos *e;
+	t_collect_pos *c;
 
+	p = NULL;
+	c = NULL;
+	e = NULL;
 	fd = check_error(ac, av);
 	len = count_lines(fd);
 	close(fd);
 	if (len == 0)
-	{
 		return (1);
-	}
 	fd = check_error(ac, av);
 	arr = read_file(fd, len);
 	if (!check_lines(arr, len) || !check_rectangular(arr, len))
-		return (1);
-	if (check_valide_c(arr, len, 'E') != 1 || check_valide_c(arr, len, 'P') != 1 || check_valide_c(arr, len, 'C') <= 0)
+		return (free_arr(&arr), 1);
+	if (check_valide_c(arr, len, 'E') != 1 || check_valide_c(arr, len, 'P') != 1 
+		|| check_valide_c(arr, len, 'C') <= 0)
 	{
 		write(1, "Error\nu need to follow do ruls\n", 31);
-		return (1);
+		return (free_arr(&arr), 1);
 	}
 	if (!check_map(arr, len))	
-		return (1);
-	p_pos = get_player_pos(arr, 'P', len);
-	printf("player position :\ncolumn = %d\nrew = %d\n", p_pos->column, p_pos->row);
-	e_pos = get_exit_position(arr, 'E', len); 
-	printf("exit position :\ncolumn = %d\nrew = %d\n", e_pos->column, e_pos->row);
-	c_pos = get_collectible_pos(arr, 'C', len);
-	printf("collectible position :\n");
-	while (c_pos)
+		return (free_arr(&arr), 1);
+	n_c = check_valide_c(arr, len, 'C');
+	e = get_exit_position(arr, 'E', len);
+	c = get_collectible_pos(arr, 'E', len);
+	p = get_player_pos(arr, 'E', len);
+
+	check_way(arr, p->x, p->y);
+	if (!check_map_c(arr))
 	{
-		printf("column = %d\nrew = %d", c_pos->column, c_pos->row);
-		c_pos = c_pos->next;
+
+		write(1,"Error\ninvalide map\n", 19);
+		free(e);
+		free(p);
+		free_lst(&c);
+		return (free_arr(&arr), 1);
 	}
 
-
+	free(e);
+	free(p);
+	free_lst(&c);
+	free_arr(&arr);
 	return (0);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
