@@ -12,26 +12,6 @@
 
 #include "so_long.h"
 
-void generate_items(t_game *game)
-{
-	int (img_width),(i), (img_hight);
-
-		i = 0;
-	while (game->map[i])
-		i++;
-	game->rows = i;
-	game->colums = ft_strlen(game->map[0]);
-	game->mlx = mlx_init();
-	if (ft_strlen(game->map[0]) > 30)
-		ft_putstr("Error\nmap is too big\n");
-	game->win = mlx_new_window(game->mlx, 1920, 1080, "Hello world!");
-	game->e_img = mlx_xpm_file_to_image(game->mlx,"./texture/exit.xpm", &img_width, &img_hight);
-	game->c_img = mlx_xpm_file_to_image(game->mlx,"./texture/collectables.xpm", &img_width, &img_hight);
-	game->p_img = mlx_xpm_file_to_image(game->mlx,"./texture/player.xpm", &img_width, &img_hight);
-	game->w_img = mlx_xpm_file_to_image(game->mlx,"./texture/wall.xpm", &img_width, &img_hight);
-	game->b_img = mlx_xpm_file_to_image(game->mlx,"./texture/background.xpm", &img_width, &img_hight);
-}
-
 void put_image(t_game *game, int *i, int *j)
 {
 	if (game->map[(*i)][(*j)] == 'P')
@@ -50,7 +30,6 @@ void display_map(t_game *game)
 {
 	int (i), (j);
 
-	generate_items(game);
 	i = 0;
 	while (game->map[i])
 	{

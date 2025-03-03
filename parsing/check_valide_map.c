@@ -22,6 +22,11 @@ void	check_way(char **arr, int x, int y)
 	if (x < 0 || y < 0 || x >= column || y >= row || arr[y][x] == 'D'
 		|| arr[y][x] == '1')
 		return ;
+	if (arr[y][x] == 'E')
+	{
+		arr[y][x] = '1';
+		return ;
+	}
 	arr[y][x] = 'D';
 	check_way(arr, x - 1, y);
 	check_way(arr, x + 1, y);

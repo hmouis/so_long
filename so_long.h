@@ -22,6 +22,8 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <X11/X.h>
+# include <X11/keysym.h>
 
 typedef struct s_game_info
 {
@@ -52,7 +54,7 @@ void							free_arr(char ***arr);
 void							ft_putstr(char *s);
 char							*ft_strdup(char *s1);
 void							check_way(char **arr, int x, int y);
-int								handle_key(t_game *game, int key);
+int								handle_key(int key, t_game *game);
 int								check_char(char c, char *str);
 int								check_map(char **arr, int len);
 int								check_valide_c(char **arr, int len, char c);

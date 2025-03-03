@@ -12,17 +12,29 @@
 
 #include "so_long.h"
 
-int	handle_key(t_game *game, int key)
+int	handle_key(int key, t_game *game)
 {
-	if (game->p_x > 1 && key == 97)
+	if (key == XK_a)
+	{
+		game->map[game->p_y][game->p_x] = '0'; 
+		game->map[game->p_y][game->p_x - 1] = 'P'; 
 		game->p_x -= 1;
-	else if (game->p_x < (game->colums - 2) && key == 100)
+	}
+	else if (key == XK_d)
+	{
+		game->map[game->p_y][game->p_x] = '0'; 
+		game->map[game->p_y][game->p_x + 1] = 'P'; 
 		game->p_x += 1;
-	else if (game->p_y > 1 && key == 119)
+	}
+	else if (key == XK_w)
+	{
 		game->p_y -= 1;
-	else if (game->p_y < (game->rows - 2) && key == 115)
+	}
+	else if (key == XK_s)
+	{
 		game->p_y += 1;
-	else if (key == 53)
-		return (0);
+	}
+	else if (key == XK_Escape)
+		exit(0);
 	return (1);
 }
