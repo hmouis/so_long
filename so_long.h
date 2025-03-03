@@ -6,7 +6,7 @@
 /*   By: hmouis <hmouis@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 09:34:51 by hmouis            #+#    #+#             */
-/*   Updated: 2025/03/02 04:41:52 by hmouis           ###   ########.fr       */
+/*   Updated: 2025/03/03 18:01:46 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,20 @@ typedef struct s_game_info
 	int p_y;
 }	t_game;
 
+void handle_a(t_game *game);
+void handle_d(t_game *game);
+void handle_s(t_game *game);
+void handle_w(t_game *game);
+void display_background(t_game *game, int x, int y);
+void display_move(t_game *game);
+void  display_col(t_game *game, int x, int y);
+void  display_exit(t_game *game, int x, int y);
+void display_player(t_game *game, int x, int y);
+void generate_items(t_game *game);
+void run_my_game(t_game *game);
 void player_pos(t_game *game);
 void generate_items(t_game *game);
-void put_image(t_game *game, int *i, int *j);
+void put_image(t_game *game, int i, int j);
 void display_map(t_game *game);
 char **copy_map(char **arr);
 char *ft_strdup1(char *str);

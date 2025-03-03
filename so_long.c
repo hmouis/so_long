@@ -6,7 +6,7 @@
 /*   By: hmouis <hmouis@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 09:43:00 by hmouis            #+#    #+#             */
-/*   Updated: 2025/03/02 04:45:43 by hmouis           ###   ########.fr       */
+/*   Updated: 2025/03/03 17:23:18 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,29 +99,7 @@ void	free_arr(char ***arr)
 	}
 	free(*arr);
 }
-void run_my_game(t_game *game)
-{
-	int i;
 
-	int (img_width), (img_hight);
-	i = 0;
-	while (game->map[i])
-		i++;
-	game->rows = i;
-	game->colums = ft_strlen(game->map[0]);
-	game->mlx = mlx_init();
-	if (ft_strlen(game->map[0]) > 30)
-		ft_putstr("Error\nmap is too big\n");
-	game->win = mlx_new_window(game->mlx, game->colums * 64, game->rows * 64, "so_long");
-	game->e_img = mlx_xpm_file_to_image(game->mlx,"./texture/exit.xpm", &img_width, &img_hight);
-	game->c_img = mlx_xpm_file_to_image(game->mlx,"./texture/collectables.xpm", &img_width, &img_hight);
-	game->p_img = mlx_xpm_file_to_image(game->mlx,"./texture/player.xpm", &img_width, &img_hight);
-	game->w_img = mlx_xpm_file_to_image(game->mlx,"./texture/wall.xpm", &img_width, &img_hight);
-	game->b_img = mlx_xpm_file_to_image(game->mlx,"./texture/background.xpm", &img_width, &img_hight);
-	display_map(game);
-	mlx_hook(game->win,2, 1L << 0, handle_key, game);
-	mlx_loop(game->mlx);
-}
 int	main(int ac, char **av)
 {
 	int		(fd), (len);
@@ -139,18 +117,10 @@ int	main(int ac, char **av)
 	game.map = copy_map(arr);
 	if (!check_and_free(arr, len) || !check_and_free_2(&game, arr))
 		return (free_arr(&arr), 1);
-	run_my_game(&game);	
-	/*while (game.map[i])*/
-	/*	i++;*/
-	/*game.rows = i;*/
-	/*game.colums = ft_strlen(game.map[0]);*/
-	/*game.mlx = mlx_init();*/
-	/*game.win = mlx_new_window(game.mlx, game.colums * 64, game.rows * 64, "so_long");*/
-	/*display_map(&game);*/
-	/*free_arr(&arr);*/
-	/*mlx_hook(game.win,2, 1L << 0, handle_key, &game);*/
-	/*display_map(&game);*/
-	/*free_arr(&arr);*/
-	/*mlx_loop(game.mlx);*/
+	display_map(&game);
+
+
+	mlx_key_hook(game.win, handle_key, &game);
+	mlx_loop(game.mlx);
 	return (0);
 }
