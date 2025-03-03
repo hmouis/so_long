@@ -49,7 +49,7 @@ int	check_rectangular(char **arr, int len)
 	return (1);
 }
 
-int	check_valide_c(char **arr, int len, char c)
+int	count_items(char **arr, int len, char c)
 {
 	int (length), (i), (j), (count);
 	i = 1;

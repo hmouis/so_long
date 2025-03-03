@@ -39,7 +39,7 @@ int	count_lines(int fd)
 	char	*line_1;
 	char	*lines;
 
-	int (j), (len);
+	int(j), (len);
 	len = 1;
 	line_1 = get_next_line(fd);
 	lines = get_next_line(fd);
@@ -102,11 +102,10 @@ void	free_arr(char ***arr)
 
 int	main(int ac, char **av)
 {
-	int		(fd), (len);
 	char	**arr;
-	t_game game;
+	t_game	game;
 
-
+	int(fd), (len);
 	fd = check_error(ac, av);
 	len = count_lines(fd);
 	close(fd);
@@ -116,10 +115,11 @@ int	main(int ac, char **av)
 	arr = read_file(fd, len);
 	game.map = copy_map(arr);
 	if (!check_and_free(arr, len) || !check_and_free_2(&game, arr))
-		return (free_arr(&arr), 1);
+		return (free_arr(&arr), free_arr(&game.map), 1);
+	game.col = count_items(game.map, len, 'C');
+	game.moves = 0;
+	game.done = 1;
 	display_map(&game);
-
-
 	mlx_key_hook(game.win, handle_key, &game);
 	mlx_loop(game.mlx);
 	return (0);

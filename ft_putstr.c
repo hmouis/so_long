@@ -25,11 +25,11 @@ void	ft_putstr(char *s)
 	}
 }
 
-char **copy_map(char **arr)
+char	**copy_map(char **arr)
 {
-	int (i);
-	char **str;
+	char	**str;
 
+	int(i);
 	i = 0;
 	while (arr[i])
 		i++;

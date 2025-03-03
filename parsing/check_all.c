@@ -16,8 +16,8 @@ int	check_and_free(char **arr, int len)
 {
 	if (!check_lines(arr, len) || !check_rectangular(arr, len))
 		return (0);
-	if (check_valide_c(arr, len, 'E') != 1 || check_valide_c(arr, len, 'P') != 1
-		|| check_valide_c(arr, len, 'C') == 0)
+	if (count_items(arr, len, 'E') != 1 || count_items(arr, len, 'P') != 1
+		|| count_items(arr, len, 'C') == 0)
 	{
 		ft_putstr("Error\ninvalid map\n");
 		return (0);

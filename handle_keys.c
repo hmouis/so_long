@@ -15,89 +15,121 @@
 int	handle_key(int key, t_game *game)
 {
 	if (key == XK_a)
-		handle_a(game);
-	else if (key == XK_d)
-			handle_d(game);
-	else if (key == XK_w)
-			handle_w(game);
-	else if (key == XK_s)
-			handle_s(game);
-	else if (key == XK_Escape)
+		if (handle_a(game))
+			game->col--;
+	if (key == XK_d)
+		if (handle_d(game))
+			game->col--;
+	if (key == XK_w)
+		if (handle_w(game))
+			game->col--;
+	if (key == XK_s)
+		if (handle_s(game))
+			game->col--;
+	if (key == XK_Escape)
+	{
+		free_all(game);
 		exit(0);
+	}
 	return (1);
 }
 
-void handle_a(t_game *game)
+int	handle_a(t_game *game)
 {
-	if (game->p_x > 1 && game->map[game->p_y][game->p_x - 1] != '1' && game->map[game->p_y][game->p_x - 1] != 'E')
-	{
-		game->map[game->p_y][game->p_x] = '0'; 
-		game->map[game->p_y][game->p_x - 1] = 'P'; 
-		game->p_x -= 1;
-		display_move(game);
-	}
-}
+	int remainder;
 
-void handle_d(t_game *game)
-{
-	if (game->p_x < game->colums - 2 && game->map[game->p_y][game->p_x + 1] != '1' && game->map[game->p_y][game->p_x + 1] != 'E')
-	{
-		game->map[game->p_y][game->p_x] = '0'; 
-		game->map[game->p_y][game->p_x + 1] = 'P'; 
-		game->p_x += 1;
-		display_move(game);
-	}
-}
-
-void handle_w(t_game *game)
-{
-	if (game->p_y > 1 && game->map[game->p_y - 1][game->p_x] != '1' && game->map[game->p_y - 1][game->p_x] != 'E')
+	remainder = 0;
+	if (game->p_x > 1 && game->map[game->p_y][game->p_x - 1] != '1'
+		&& (game->map[game->p_y][game->p_x - 1] != 'E' || game->col <= 0))
 	{
 		game->map[game->p_y][game->p_x] = '0';
-		game->map[game->p_y  - 1][game->p_x] = 'P'; 
-		game->p_y -= 1;
+		if (game->map[game->p_y][game->p_x - 1] == 'C')
+			remainder = 1;
+		if (game->map[game->p_y][game->p_x - 1] == 'E' && game->col <= 0)
+			exit(0);
+		game->map[game->p_y][game->p_x - 1] = 'P';
+		game->p_x -= 1;
+		game->moves++;
+		printf("move = %d\n", game->moves);
 		display_move(game);
 	}
-
+	return (remainder);
 }
 
-void handle_s(t_game *game)
+int	handle_d(t_game *game)
 {
-	if (game->p_y < game->rows - 2 && game->map[game->p_y + 1][game->p_x] != '1' && game->map[game->p_y + 1][game->p_x] != 'E')
+	int r;
+
+	r = 0;
+	if (game->p_x < game->colums - 2 && game->map[game->p_y][game->p_x
+		+ 1] != '1' && (game->map[game->p_y][game->p_x + 1] != 'E' || game->col <= 0))
 	{
-		game->map[game->p_y][game->p_x] = '0'; 
-		game->map[game->p_y  + 1][game->p_x] = 'P'; 
-		game->p_y += 1;
+		game->map[game->p_y][game->p_x] = '0';
+		if (game->map[game->p_y][game->p_x + 1] == 'C')
+			r = 1;
+		if (game->map[game->p_y][game->p_x + 1] == 'E' && game->col <= 0)
+			exit(0);
+		game->map[game->p_y][game->p_x + 1] = 'P';
+		game->p_x += 1;
+		game->moves++;
+		printf("move = %d\n", game->moves);
 		display_move(game);
 	}
-
+	return (r);
 }
 
+void free_all(t_game *game)
+{
+	free_arr(&game->map);
+	mlx_destroy_image(game->mlx, game->p_img);
+	mlx_destroy_image(game->mlx, game->e_img);
+	mlx_destroy_image(game->mlx, game->c_img);
+	mlx_destroy_image(game->mlx, game->w_img);
+	mlx_destroy_image(game->mlx, game->b_img);
+	mlx_destroy_window(game->mlx, game->win);
+}
 
+int	handle_w(t_game *game)
+{
+	int r;
 
+	r = 0;
+	if (game->p_y > 1 && game->map[game->p_y - 1][game->p_x] != '1'
+		&& (game->map[game->p_y - 1][game->p_x] != 'E' || game->col <= 0))
+	{
+		game->map[game->p_y][game->p_x] = '0';
+		if (game->map[game->p_y - 1][game->p_x] == 'C')
+			r = 1;
+		if (game->map[game->p_y - 1][game->p_x] == 'E' && game->col <= 0)
+			exit(0);
+		game->map[game->p_y - 1][game->p_x] = 'P';
+		game->p_y -= 1;
+		game->moves++;
+		printf("move = %d\n", game->moves);
+		display_move(game);
+	}
+	return (r);
+}
 
+int	handle_s(t_game *game)
+{
+	int r;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	r = 0;
+	if (game->p_y < game->rows - 2 && game->map[game->p_y + 1][game->p_x] != '1'
+		&& (game->map[game->p_y + 1][game->p_x] != 'E' || game->col <= 0))
+	{
+		game->map[game->p_y][game->p_x] = '0';
+		if (game->map[game->p_y + 1][game->p_x] == 'C')
+			r = 1;
+		if (game->map[game->p_y + 1][game->p_x] == 'E' && game->col <= 0)
+			exit(0);
+		game->map[game->p_y + 1][game->p_x] = 'P';
+		game->p_y += 1;
+		game->moves++;
+		printf("move = %d\n", game->moves);
+		display_move(game);
+	}
+	return (r);
+}
 
