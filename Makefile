@@ -1,20 +1,19 @@
 NAME = so_long
 
-SRC = get_next_line.c get_next_line_utils.c so_long.c check_map.c control_nodes.c get_position.c check_valide_map.c ft_strdup.c
+SRC = parsing/get_next_line.c parsing/get_next_line_utils.c so_long.c parsing/check_map.c  parsing/get_position.c parsing/check_valide_map.c parsing/ft_strdup.c ft_putstr.c parsing/check_all.c display_window.c handle_keys.c 
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g 
 #-fsanitize=address 
-#-lXext -lX11 -lm -lz
 OBJS = $(SRC:.c=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $^ -o $@
+	$(CC) $(CFLAGS) $^ -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $@
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $? -o $@
+	$(CC) $(CFLAGS) -Imlx_linux -O3 -c $? -o $@
 
 clean:
 	rm -f $(OBJS)

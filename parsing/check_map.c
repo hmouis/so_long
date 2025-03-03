@@ -10,20 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
 int	check_lines(char **arr, int len)
 {
-	int		i;
-	int		length;
-
+	int (i), (length);
 	i = 0;
 	length = ft_strlen(arr[0]);
 	while (arr[0][i])
 	{
 		if ('1' != arr[0][i] || '1' != arr[len - 1][i])
 		{
-			write(1, "Error\ndefine the wall whit a different characters\n", 50);
+			ft_putstr("Error\ndefine the wall whit a different characters\n");
 			return (0);
 		}
 		i++;
@@ -33,7 +31,7 @@ int	check_lines(char **arr, int len)
 	{
 		if ('1' != arr[i][0] || '1' != arr[i][length - 1])
 		{
-			write(1, "Error\ndefine the wall whit a different characters\n",50);
+			ft_putstr("Error\ndefine the wall whit a different characters\n");
 			return (0);
 		}
 		i++;
@@ -45,7 +43,7 @@ int	check_rectangular(char **arr, int len)
 {
 	if (len + 1 >= ft_strlen(arr[0]))
 	{
-		write(1, "Error\nthe map is not rectangular\n", 33);
+		ft_putstr("Error\nthe map is not rectangular\n");
 		return (0);
 	}
 	return (1);
@@ -53,7 +51,7 @@ int	check_rectangular(char **arr, int len)
 
 int	check_valide_c(char **arr, int len, char c)
 {
-	int(length), (i), (j), (count);
+	int (length), (i), (j), (count);
 	i = 1;
 	count = 0;
 	length = ft_strlen(arr[0]);
@@ -73,10 +71,10 @@ int	check_valide_c(char **arr, int len, char c)
 	return (count);
 }
 
-int check_char(char c, char *str)
+int	check_char(char c, char *str)
 {
-	int i;
-	int remainder;
+	int	i;
+	int	remainder;
 
 	i = 0;
 	remainder = 0;
@@ -91,10 +89,9 @@ int check_char(char c, char *str)
 	return (1);
 }
 
-int check_map(char **arr, int len)
+int	check_map(char **arr, int len)
 {
 	int (i), (j);
-
 	i = 1;
 	while (i < len)
 	{
@@ -103,7 +100,7 @@ int check_map(char **arr, int len)
 		{
 			if (!check_char(arr[i][j], "0PCE1"))
 			{
-				write(1, "Error\ninvalide character\n", 25);
+				ft_putstr("Error\ninvalide character\n");
 				return (0);
 			}
 			j++;
@@ -112,4 +109,3 @@ int check_map(char **arr, int len)
 	}
 	return (1);
 }
-

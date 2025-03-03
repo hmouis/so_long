@@ -1,28 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_keys.c                                      :+:      :+:    :+:   */
+/*   get_position.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmouis <hmouis@1337.ma>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/21 13:59:38 by hmouis            #+#    #+#             */
-/*   Updated: 2025/02/21 14:24:05 by hmouis           ###   ########.fr       */
+/*   Created: 2025/02/16 13:56:27 by hmouis            #+#    #+#             */
+/*   Updated: 2025/02/16 15:11:39 by hmouis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
-int	handle_key(t_game *game, int key)
+void player_pos(t_game *game)
 {
-	if (game->p_x > 1 && key == 97)
-		game->p_x -= 1;
-	else if (game->p_x < (game->colums - 2) && key == 100)
-		game->p_x += 1;
-	else if (game->p_y > 1 && key == 119)
-		game->p_y -= 1;
-	else if (game->p_y < (game->rows - 2) && key == 115)
-		game->p_y += 1;
-	else if (key == 53)
-		return (0);
-	return (1);
+	int (i), (j);
+
+	i = 0;
+	while (game->map[i])
+	{
+		j = 0;
+		while (game->map[i][j])
+		{
+			if (game->map[i][j] == 'P')
+			{
+				game->p_x = j;
+				game->p_y = i;
+				return ;
+			}
+			j++;
+		}
+		i++;
+	}
 }
