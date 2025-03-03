@@ -116,6 +116,7 @@ int	main(int ac, char **av)
 	game.map = copy_map(arr);
 	if (!check_and_free(arr, len) || !check_and_free_2(&game, arr))
 		return (free_arr(&arr), free_arr(&game.map), 1);
+	free_arr(&arr);
 	game.col = count_items(game.map, len, 'C');
 	game.moves = 0;
 	game.done = 1;
