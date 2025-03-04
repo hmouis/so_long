@@ -122,6 +122,7 @@ int	main(int ac, char **av)
 	game.done = 1;
 	display_map(&game);
 	mlx_key_hook(game.win, handle_key, &game);
+	mlx_hook(game.win, DestroyNotify, StructureNotifyMask, handle_cross, &game);
 	mlx_loop(game.mlx);
 	return (0);
 }
