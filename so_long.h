@@ -44,7 +44,7 @@ typedef struct s_game_info
 	int		p_y;
 }			t_game;
 
-int handle_cross(t_game *game);
+int			handle_cross(t_game *game);
 void		ft_putnbr(int n);
 void		free_all(t_game *game);
 int			handle_a(t_game *game);

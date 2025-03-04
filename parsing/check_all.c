@@ -72,7 +72,7 @@ void	free_all(t_game *game)
 	exit(0);
 }
 
-int handle_cross(t_game *game)
+int	handle_cross(t_game *game)
 {
 	free_all(game);
 	return (0);
