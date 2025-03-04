@@ -36,7 +36,7 @@ int	handle_key(int key, t_game *game)
 
 int	handle_a(t_game *game)
 {
-	int remainder;
+	int	remainder;
 
 	remainder = 0;
 	if (game->p_x > 1 && game->map[game->p_y][game->p_x - 1] != '1'
@@ -61,11 +61,12 @@ int	handle_a(t_game *game)
 
 int	handle_d(t_game *game)
 {
-	int r;
+	int	r;
 
 	r = 0;
 	if (game->p_x < game->colums - 2 && game->map[game->p_y][game->p_x
-		+ 1] != '1' && (game->map[game->p_y][game->p_x + 1] != 'E' || game->col <= 0))
+		+ 1] != '1' && (game->map[game->p_y][game->p_x + 1] != 'E'
+			|| game->col <= 0))
 	{
 		game->map[game->p_y][game->p_x] = '0';
 		if (game->map[game->p_y][game->p_x + 1] == 'C')
@@ -84,22 +85,9 @@ int	handle_d(t_game *game)
 	return (r);
 }
 
-void free_all(t_game *game)
-{
-	free_arr(&game->map);
-	mlx_destroy_image(game->mlx, game->p_img);
-	mlx_destroy_image(game->mlx, game->e_img);
-	mlx_destroy_image(game->mlx, game->c_img);
-	mlx_destroy_image(game->mlx, game->w_img);
-	mlx_destroy_image(game->mlx, game->b_img);
-	mlx_destroy_window(game->mlx, game->win);
-	mlx_destroy_display(game->mlx);
-	free(game->mlx);
-}
-
 int	handle_w(t_game *game)
 {
-	int r;
+	int	r;
 
 	r = 0;
 	if (game->p_y > 1 && game->map[game->p_y - 1][game->p_x] != '1'
@@ -124,7 +112,7 @@ int	handle_w(t_game *game)
 
 int	handle_s(t_game *game)
 {
-	int r;
+	int	r;
 
 	r = 0;
 	if (game->p_y < game->rows - 2 && game->map[game->p_y + 1][game->p_x] != '1'
@@ -146,4 +134,3 @@ int	handle_s(t_game *game)
 	}
 	return (r);
 }
-

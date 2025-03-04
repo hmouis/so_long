@@ -12,6 +12,20 @@
 
 #include "so_long.h"
 
+int	ft_strlen1(char *s)
+{
+	int	i;
+
+	i = 0;
+	if (!s)
+		return (i);
+	while (s[i])
+		i++;
+	if (s[i - 1] != '\n')
+		i++;
+	return (i);
+}
+
 void	ft_putstr(char *s)
 {
 	int	i;
@@ -28,8 +42,8 @@ void	ft_putstr(char *s)
 char	**copy_map(char **arr)
 {
 	char	**str;
+	int		i;
 
-	int(i);
 	i = 0;
 	while (arr[i])
 		i++;

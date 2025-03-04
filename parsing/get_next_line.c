@@ -99,7 +99,7 @@ char	*get_next_line(int fd)
 	static char	*str;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
+		return (free(str), NULL);
 	str = fill_str(str, fd);
 	if (!str)
 		return (NULL);

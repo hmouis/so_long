@@ -14,26 +14,24 @@
 
 void	generate_items(t_game *game)
 {
-	int(img_width), (i), (img_hight);
+	int (img_width), (i), (img_hight);
 	i = 0;
 	while (game->map[i])
 		i++;
 	game->rows = i;
 	game->colums = ft_strlen(game->map[0]);
 	game->mlx = mlx_init();
-	if (ft_strlen(game->map[0]) > 30)
-		ft_putstr("Error\nmap is too big\n");
 	game->win = mlx_new_window(game->mlx, game->colums * 64, game->rows * 64,
-			"Hello world!");
-	game->e_img = mlx_xpm_file_to_image(game->mlx, "./texture/exit.xpm",
+			"so_long");
+	game->e_img = mlx_xpm_file_to_image(game->mlx, "./textures/exit.xpm",
 			&img_width, &img_hight);
-	game->c_img = mlx_xpm_file_to_image(game->mlx, "./texture/collectables.xpm",
+	game->c_img = mlx_xpm_file_to_image(game->mlx, "./textures/collectables.xpm",
 			&img_width, &img_hight);
-	game->p_img = mlx_xpm_file_to_image(game->mlx, "./texture/player.xpm",
+	game->p_img = mlx_xpm_file_to_image(game->mlx, "./textures/player.xpm",
 			&img_width, &img_hight);
-	game->w_img = mlx_xpm_file_to_image(game->mlx, "./texture/wall.xpm",
+	game->w_img = mlx_xpm_file_to_image(game->mlx, "./textures/wall.xpm",
 			&img_width, &img_hight);
-	game->b_img = mlx_xpm_file_to_image(game->mlx, "./texture/background.xpm",
+	game->b_img = mlx_xpm_file_to_image(game->mlx, "./textures/background.xpm",
 			&img_width, &img_hight);
 }
 
@@ -58,7 +56,7 @@ void	put_image(t_game *game, int i, int j)
 
 void	display_map(t_game *game)
 {
-	int(i), (j);
+	int (i), (j);
 	i = 0;
 	generate_items(game);
 	while (game->map[i])

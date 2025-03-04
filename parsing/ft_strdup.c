@@ -17,23 +17,29 @@ char	*ft_strdup(char *s1)
 	size_t	i;
 	char	*arr;
 	size_t	s1_len;
+	int		j;
 
 	s1_len = ft_strlen(s1);
 	i = 0;
+	j = 0;
 	arr = (char *)malloc(sizeof(char) * s1_len + 1);
 	if (arr == NULL)
 		return (NULL);
-	while (s1[i] != '\n')
+	while (s1[j])
 	{
-		arr[i] = s1[i];
+		if (s1[j] == '\n')
+			break ;
+		else
+			arr[i] = s1[j];
 		i++;
+		j++;
 	}
 	arr[i] = '\0';
 	return (arr);
 }
 
 char	*ft_strdup1(char *s1)
-{	
+{
 	size_t	i;
 	char	*arr;
 	size_t	s1_len;
@@ -50,23 +56,4 @@ char	*ft_strdup1(char *s1)
 	}
 	arr[i] = '\0';
 	return (arr);
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

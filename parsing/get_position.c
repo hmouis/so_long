@@ -12,10 +12,9 @@
 
 #include "../so_long.h"
 
-void player_pos(t_game *game)
+void	player_pos(t_game *game)
 {
 	int (i), (j);
-
 	i = 0;
 	while (game->map[i])
 	{

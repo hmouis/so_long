@@ -39,16 +39,6 @@ int	check_lines(char **arr, int len)
 	return (1);
 }
 
-int	check_rectangular(char **arr, int len)
-{
-	if (len + 1 >= ft_strlen(arr[0]))
-	{
-		ft_putstr("Error\nthe map is not rectangular\n");
-		return (0);
-	}
-	return (1);
-}
-
 int	count_items(char **arr, int len, char c)
 {
 	int (length), (i), (j), (count);

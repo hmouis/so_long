@@ -38,22 +38,22 @@ int	count_lines(int fd)
 {
 	char	*line_1;
 	char	*lines;
+	int		len;
 
-	int(j), (len);
 	len = 1;
 	line_1 = get_next_line(fd);
 	lines = get_next_line(fd);
-	if (!line_1 || !lines || ft_strlen(line_1) < 3 || line_1[0] == '\n')
+	if (!line_1 || !lines)
 	{
-		ft_putstr("Error\ninvalide map\n");
+		ft_putstr("Error\ninvalid map\n");
 		return (free(line_1), free(lines), 0);
 	}
-	j = ft_strlen(line_1);
 	while (lines)
 	{
-		if ((j != ft_strlen(lines)) || ft_strlen(lines) < 3 || lines[0] == '\n')
+		if (ft_strlen(line_1) != ft_strlen1(lines))
 		{
-			ft_putstr("Error\ninvalide map\n");
+			ft_putstr("Error\ndef len\n");
+			get_next_line(-1);
 			return (free(lines), free(line_1), 0);
 		}
 		len++;
@@ -105,11 +105,11 @@ int	main(int ac, char **av)
 	char	**arr;
 	t_game	game;
 
-	int(fd), (len);
+	int (fd), (len);
 	fd = check_error(ac, av);
 	len = count_lines(fd);
 	close(fd);
-	if (len == 0 || len > 16)
+	if (len == 0)
 		return (1);
 	fd = check_error(ac, av);
 	arr = read_file(fd, len);

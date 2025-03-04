@@ -14,7 +14,7 @@
 
 int	check_and_free(char **arr, int len)
 {
-	if (!check_lines(arr, len) || !check_rectangular(arr, len))
+	if (!check_lines(arr, len))
 		return (0);
 	if (count_items(arr, len, 'E') != 1 || count_items(arr, len, 'P') != 1
 		|| count_items(arr, len, 'C') == 0)
@@ -56,4 +56,17 @@ int	check_map_c(char **str)
 		i++;
 	}
 	return (1);
+}
+
+void	free_all(t_game *game)
+{
+	free_arr(&game->map);
+	mlx_destroy_image(game->mlx, game->p_img);
+	mlx_destroy_image(game->mlx, game->e_img);
+	mlx_destroy_image(game->mlx, game->c_img);
+	mlx_destroy_image(game->mlx, game->w_img);
+	mlx_destroy_image(game->mlx, game->b_img);
+	mlx_destroy_window(game->mlx, game->win);
+	mlx_destroy_display(game->mlx);
+	free(game->mlx);
 }
