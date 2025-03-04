@@ -48,6 +48,8 @@ int	handle_a(t_game *game)
 		if (game->map[game->p_y][game->p_x - 1] == 'E' && game->col <= 0)
 		{
 			free_all(game);
+			game->moves++;
+			printf("move = %d\n", game->moves);
 			exit(0);
 		}
 		game->map[game->p_y][game->p_x - 1] = 'P';
@@ -74,6 +76,8 @@ int	handle_d(t_game *game)
 		if (game->map[game->p_y][game->p_x + 1] == 'E' && game->col <= 0)
 		{
 			free_all(game);
+			game->moves++;
+			printf("move = %d\n", game->moves);
 			exit(0);
 		}
 		game->map[game->p_y][game->p_x + 1] = 'P';
@@ -99,6 +103,8 @@ int	handle_w(t_game *game)
 		if (game->map[game->p_y - 1][game->p_x] == 'E' && game->col <= 0)
 		{
 			free_all(game);
+			game->moves++;
+			printf("move = %d\n", game->moves);
 			exit(0);
 		}
 		game->map[game->p_y - 1][game->p_x] = 'P';
@@ -124,6 +130,8 @@ int	handle_s(t_game *game)
 		if (game->map[game->p_y + 1][game->p_x] == 'E' && game->col <= 0)
 		{
 			free_all(game);
+			game->moves++;
+			printf("move = %d\n", game->moves);
 			exit(0);
 		}
 		game->map[game->p_y + 1][game->p_x] = 'P';

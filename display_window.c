@@ -23,15 +23,15 @@ void	generate_items(t_game *game)
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, game->colums * 64, game->rows * 64,
 			"so_long");
-	game->e_img = mlx_xpm_file_to_image(game->mlx, "./textures/exit.xpm",
+	game->e_img = mlx_xpm_file_to_image(game->mlx, "./textures/e.xpm",
 			&img_width, &img_hight);
-	game->c_img = mlx_xpm_file_to_image(game->mlx, "./textures/collectables.xpm",
+	game->c_img = mlx_xpm_file_to_image(game->mlx, "./textures/c.xpm",
 			&img_width, &img_hight);
-	game->p_img = mlx_xpm_file_to_image(game->mlx, "./textures/player.xpm",
+	game->p_img = mlx_xpm_file_to_image(game->mlx, "./textures/p.xpm",
 			&img_width, &img_hight);
-	game->w_img = mlx_xpm_file_to_image(game->mlx, "./textures/wall.xpm",
+	game->w_img = mlx_xpm_file_to_image(game->mlx, "./textures/w.xpm",
 			&img_width, &img_hight);
-	game->b_img = mlx_xpm_file_to_image(game->mlx, "./textures/background.xpm",
+	game->b_img = mlx_xpm_file_to_image(game->mlx, "./textures/b.xpm",
 			&img_width, &img_hight);
 }
 
