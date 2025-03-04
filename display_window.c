@@ -23,6 +23,8 @@ void	generate_items(t_game *game)
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, game->colums * 64, game->rows * 64,
 			"so_long");
+	if (!game->mlx || !game->win)
+		free_all(game);
 	game->e_img = mlx_xpm_file_to_image(game->mlx, "./textures/e.xpm",
 			&img_width, &img_hight);
 	game->c_img = mlx_xpm_file_to_image(game->mlx, "./textures/c.xpm",
@@ -33,6 +35,9 @@ void	generate_items(t_game *game)
 			&img_width, &img_hight);
 	game->b_img = mlx_xpm_file_to_image(game->mlx, "./textures/b.xpm",
 			&img_width, &img_hight);
+	if (!game->e_img || !game->p_img || !game->c_img
+		|| !game->w_img || !game->e_img)
+		free_all(game);
 }
 
 void	put_image(t_game *game, int i, int j)

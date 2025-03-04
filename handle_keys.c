@@ -27,10 +27,7 @@ int	handle_key(int key, t_game *game)
 		if (handle_s(game))
 			game->col--;
 	if (key == XK_Escape)
-	{
 		free_all(game);
-		exit(0);
-	}
 	return (1);
 }
 
@@ -47,15 +44,16 @@ int	handle_a(t_game *game)
 			remainder = 1;
 		if (game->map[game->p_y][game->p_x - 1] == 'E' && game->col <= 0)
 		{
-			free_all(game);
 			game->moves++;
-			printf("move = %d\n", game->moves);
-			exit(0);
+			ft_putnbr(game->moves);
+			ft_putstr("\n");
+			free_all(game);
 		}
 		game->map[game->p_y][game->p_x - 1] = 'P';
 		game->p_x -= 1;
 		game->moves++;
-		printf("move = %d\n", game->moves);
+		ft_putnbr(game->moves);
+		ft_putstr("\n");
 		display_move(game);
 	}
 	return (remainder);
@@ -75,15 +73,16 @@ int	handle_d(t_game *game)
 			r = 1;
 		if (game->map[game->p_y][game->p_x + 1] == 'E' && game->col <= 0)
 		{
-			free_all(game);
 			game->moves++;
-			printf("move = %d\n", game->moves);
-			exit(0);
+			ft_putnbr(game->moves);
+			ft_putstr("\n");
+			free_all(game);
 		}
 		game->map[game->p_y][game->p_x + 1] = 'P';
 		game->p_x += 1;
 		game->moves++;
-		printf("move = %d\n", game->moves);
+		ft_putnbr(game->moves);
+		ft_putstr("\n");
 		display_move(game);
 	}
 	return (r);
@@ -102,15 +101,16 @@ int	handle_w(t_game *game)
 			r = 1;
 		if (game->map[game->p_y - 1][game->p_x] == 'E' && game->col <= 0)
 		{
-			free_all(game);
 			game->moves++;
-			printf("move = %d\n", game->moves);
-			exit(0);
+			ft_putnbr(game->moves);
+			ft_putstr("\n");
+			free_all(game);
 		}
 		game->map[game->p_y - 1][game->p_x] = 'P';
 		game->p_y -= 1;
 		game->moves++;
-		printf("move = %d\n", game->moves);
+		ft_putnbr(game->moves);
+		ft_putstr("\n");
 		display_move(game);
 	}
 	return (r);
@@ -129,15 +129,16 @@ int	handle_s(t_game *game)
 			r = 1;
 		if (game->map[game->p_y + 1][game->p_x] == 'E' && game->col <= 0)
 		{
-			free_all(game);
 			game->moves++;
-			printf("move = %d\n", game->moves);
-			exit(0);
+			ft_putnbr(game->moves);
+			ft_putstr("\n");
+			free_all(game);
 		}
 		game->map[game->p_y + 1][game->p_x] = 'P';
 		game->p_y += 1;
 		game->moves++;
-		printf("move = %d\n", game->moves);
+		ft_putnbr(game->moves);
+		ft_putstr("\n");
 		display_move(game);
 	}
 	return (r);

@@ -69,4 +69,5 @@ void	free_all(t_game *game)
 	mlx_destroy_window(game->mlx, game->win);
 	mlx_destroy_display(game->mlx);
 	free(game->mlx);
+	exit(0);
 }
