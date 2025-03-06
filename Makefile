@@ -1,10 +1,10 @@
 NAME = so_long
 
-SRC = parsing/get_next_line.c parsing/get_next_line_utils.c so_long.c parsing/check_map.c  parsing/get_position.c parsing/check_valide_map.c parsing/ft_strdup.c ft_putstr.c parsing/check_all.c display_window.c handle_keys.c display_items.c 
+SRC = get_next_line.c get_next_line_utils.c so_long.c check_map.c get_position.c check_valide_map.c ft_strdup.c ft_putstr.c check_all.c display_window.c handle_keys.c display_items.c 
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g 
-#-fsanitize=address 
+CFLAGS = -Wall -Wextra -g 
+#-Werror
 OBJS = $(SRC:.c=.o)
 
 all: $(NAME)

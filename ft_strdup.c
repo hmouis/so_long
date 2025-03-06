@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../so_long.h"
+#include "so_long.h"
 
 char	*ft_strdup(char *s1)
 {
@@ -56,4 +56,10 @@ char	*ft_strdup1(char *s1)
 	}
 	arr[i] = '\0';
 	return (arr);
+}
+
+void	ft_error(char *s)
+{
+	ft_putstr(s);
+	exit(0);
 }

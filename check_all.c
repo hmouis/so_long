@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../so_long.h"
+#include "so_long.h"
 
 int	check_and_free(char **arr, int len)
 {
@@ -60,15 +60,27 @@ int	check_map_c(char **str)
 
 void	free_all(t_game *game)
 {
-	free_arr(&game->map);
-	mlx_destroy_image(game->mlx, game->p_img);
-	mlx_destroy_image(game->mlx, game->e_img);
-	mlx_destroy_image(game->mlx, game->c_img);
-	mlx_destroy_image(game->mlx, game->w_img);
-	mlx_destroy_image(game->mlx, game->b_img);
-	mlx_destroy_window(game->mlx, game->win);
-	mlx_destroy_display(game->mlx);
-	free(game->mlx);
+	if (!game)
+		return ;
+	if (game->map)
+		free_arr(&game->map);
+	if (game->mlx && game->e_img)
+		mlx_destroy_image(game->mlx, game->e_img);
+	if (game->mlx && game->c_img)
+		mlx_destroy_image(game->mlx, game->c_img);
+	if (game->mlx && game->w_img)
+		mlx_destroy_image(game->mlx, game->w_img);
+	if (game->mlx && game->b_img)
+		mlx_destroy_image(game->mlx, game->b_img);
+	if (game->mlx && game->p_img)
+		mlx_destroy_image(game->mlx, game->p_img);
+	if (game->mlx && game->win)
+		mlx_destroy_window(game->mlx, game->win);
+	if (game->mlx)
+	{
+		mlx_destroy_display(game->mlx);
+		free(game->mlx);
+	}
 	exit(0);
 }
 

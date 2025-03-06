@@ -34,7 +34,7 @@ void	ft_putstr(char *s)
 	while (s[i])
 	{
 		if (write(1, &s[i], 1) == -1)
-			perror("write failed\n");
+			perror("Error\nwrite failed\n");
 		i++;
 	}
 }
@@ -58,12 +58,15 @@ char	**copy_map(char **arr)
 	return (str);
 }
 
+void	ft_putchar(char c)
+{
+	if (write (1, &c, 1) == -1)
+		perror("Error\nwrite faled\n");
+}
+
 void	ft_putnbr(int n)
 {
-	char	c;
-
 	if (n >= 10)
 		ft_putnbr(n / 10);
-	c = (n % 10) + '0';
-	ft_putstr(&c);
+	ft_putchar((n % 10) + '0');
 }

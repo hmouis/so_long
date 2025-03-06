@@ -36,7 +36,7 @@ void	generate_items(t_game *game)
 	game->b_img = mlx_xpm_file_to_image(game->mlx, "./textures/b.xpm",
 			&img_width, &img_hight);
 	if (!game->e_img || !game->p_img || !game->c_img
-		|| !game->w_img || !game->e_img)
+		|| !game->w_img || !game->b_img)
 		free_all(game);
 }
 

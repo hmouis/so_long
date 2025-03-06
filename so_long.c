@@ -44,15 +44,11 @@ int	count_lines(int fd)
 	line_1 = get_next_line(fd);
 	lines = get_next_line(fd);
 	if (!line_1 || !lines)
-	{
-		ft_putstr("Error\ninvalid map\n");
 		return (free(line_1), free(lines), 0);
-	}
 	while (lines)
 	{
 		if (ft_strlen(line_1) != ft_strlen1(lines))
 		{
-			ft_putstr("Error\ndef len\n");
 			get_next_line(-1);
 			return (free(lines), free(line_1), 0);
 		}
@@ -108,9 +104,9 @@ int	main(int ac, char **av)
 	int (fd), (len);
 	fd = check_error(ac, av);
 	len = count_lines(fd);
+	if (len <= 1)
+		ft_error("Error\ninvalid map\n");
 	close(fd);
-	if (len == 0)
-		return (1);
 	fd = check_error(ac, av);
 	arr = read_file(fd, len);
 	game.map = copy_map(arr);
