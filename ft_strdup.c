@@ -63,3 +63,33 @@ void	ft_error(char *s)
 	ft_putstr(s);
 	exit(0);
 }
+
+int	ft_strcmp(char *s1, char *s2, int j)
+{
+	int	i;
+
+	i = 0;
+	while (s1[j] || s2[i])
+	{
+		if (s1[j] != s2[i])
+			return (s1[j] - s2[i]);
+		i++;
+		j++;
+	}
+	return (s1[j] - s2[i]);
+}
+
+int	check_file(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] && str[i] != '.')
+		i++;
+	if (ft_strcmp(str, ".ber", i) != 0)
+	{
+		ft_putstr("Error\ninvalid name\n");
+		return (0);
+	}
+	return (1);
+}

@@ -50,6 +50,8 @@ void		free_all(t_game *game);
 int			handle_a(t_game *game);
 void		ft_putchar(char c);
 int			handle_d(t_game *game);
+int			check_file(char *str);
+int			ft_strcmp(char *s1, char *s2, int j);
 void		ft_error(char *s);
 int			handle_s(t_game *game);
 int			handle_w(t_game *game);

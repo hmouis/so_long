@@ -73,6 +73,8 @@ int	check_error(int ac, char **av)
 		ft_putstr("Error\ntoo much arguments\n");
 		exit(1);
 	}
+	if (!check_file(av[1]))
+		exit(1);
 	fd = open(av[1], O_RDONLY);
 	if (fd < 0)
 	{
