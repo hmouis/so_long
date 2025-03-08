@@ -86,6 +86,11 @@ int	check_file(char *str)
 	i = 0;
 	while (str[i] && str[i] != '.')
 		i++;
+	if (str[i - 1] == '/')
+	{
+		ft_putstr("Error\ninvalid name\n");
+		return (0);
+	}
 	if (ft_strcmp(str, ".ber", i) != 0)
 	{
 		ft_putstr("Error\ninvalid name\n");
